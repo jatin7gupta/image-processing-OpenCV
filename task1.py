@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import sys
 
 
 def read_image(path):
@@ -59,16 +60,21 @@ def min_filtered_image(img, N=3):
 
 
 path = 'COMP9517_20T2_Assignment_Images/Particles.png'
-N = 11
-
 
 if __name__ == '__main__':
     I = read_image(path)
-    display_image(I, 'I')
-    A = max_filtered_image(I, N)
-    display_image(A, 'A')
-    B = min_filtered_image(A, N)
-    display_image(B, 'B')
-    # for i in range(3, 21, 2):
-    #     cv2.imwrite(f'{i}.jpg', max_filtered_image(I, i))
+    if len(sys.argv) == 2:
+        N = int(sys.argv[1])
+        if N % 2 == 1:
+            A = max_filtered_image(I, N)
+            B = min_filtered_image(A, N)
+            cv2.imwrite(f'task1_A_N_{N}.jpg', A)
+            print(f'task1_A_N_{N}.jpg saved in root.')
+            cv2.imwrite(f'task1_B_N_{N}.jpg', B)
+            print(f'task1_B_N_{N}.jpg saved in root.')
+        else:
+            print('Use command line args. N as an odd integer N > 1')
+    else:
+        print('Use command line args. N as an odd integer')
+
 
