@@ -47,6 +47,8 @@ def min_filtered_image(img, N=3):
 
     # zero image ie zero 2d array
     padded_image = np.zeros((img_row + (2 * pad_height), img_col + (2 * pad_width)))
+
+    # we choose to add 255 to not interfere with finding min values
     padded_image = padded_image + 255
 
     # embedding input image in padded image
@@ -65,13 +67,17 @@ if __name__ == '__main__':
     I = read_image(path)
     if len(sys.argv) == 2:
         N = int(sys.argv[1])
+
+        # to check if N is odd
         if N % 2 == 1:
             A = max_filtered_image(I, N)
             B = min_filtered_image(A, N)
-            cv2.imwrite(f'task1_A_N_{N}.jpg', A)
-            print(f'task1_A_N_{N}.jpg saved in root.')
-            cv2.imwrite(f'task1_B_N_{N}.jpg', B)
-            print(f'task1_B_N_{N}.jpg saved in root.')
+
+            cv2.imwrite(f'task1_A_N_{N}.png', A)
+            print(f'task1_A_N_{N}.png saved in root.')
+
+            cv2.imwrite(f'task1_B_N_{N}.png', B)
+            print(f'task1_B_N_{N}.png saved in root.')
         else:
             print('Use command line args. N as an odd integer N > 1')
     else:

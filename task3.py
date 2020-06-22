@@ -1,7 +1,7 @@
 import cv2
 import sys
 import numpy as np
-from task1 import read_image, display_image, max_filtered_image, min_filtered_image
+from task1 import read_image, max_filtered_image, min_filtered_image
 from task2 import max_min
 
 
@@ -27,19 +27,25 @@ if __name__ == '__main__':
         N = int(sys.argv[1])
         M = int(sys.argv[2])
         I = read_image(path)
+
+        # check for M and N
         if N % 2 == 1 and (M == 0 or M == 1):
             if M == 0:
                 O, background = task3(I, M, N)
-                cv2.imwrite(f'task3_N_{N}_M_{M}.jpg', O)
-                print(f'task3_N_{N}_M_{M}.jpg saved in root.')
-                cv2.imwrite(f'task3_N_{N}_M_{M}_background.jpg', background)
-                print(f'task3_N_{N}_M_{M}_background.jpg saved in root.')
+
+                cv2.imwrite(f'task3_N_{N}_M_{M}.png', O)
+                print(f'task3_N_{N}_M_{M}.png saved in root.')
+
+                cv2.imwrite(f'task3_N_{N}_M_{M}_background.png', background)
+                print(f'task3_N_{N}_M_{M}_background.png saved in root.')
             else:
                 O, background = task3(I, M, N)
-                cv2.imwrite(f'task3_N_{N}_M_{M}.jpg', O)
-                print(f'task3_N_{N}_M_{M}.jpg saved in root.')
-                cv2.imwrite(f'task3_N_{N}_M_{M}_background.jpg', background)
-                print(f'task3_N_{N}_M_{M}_background.jpg saved in root.')
+
+                cv2.imwrite(f'task3_N_{N}_M_{M}.png', O)
+                print(f'task3_N_{N}_M_{M}.png saved in root.')
+
+                cv2.imwrite(f'task3_N_{N}_M_{M}_background.png', background)
+                print(f'task3_N_{N}_M_{M}_background.png saved in root.')
         else:
             print('Use command line args. N: an odd integer N > 1 and M: either 0 or 1')
     else:
